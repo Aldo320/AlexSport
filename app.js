@@ -120,4 +120,35 @@
     renderizarCarrito();
 
 
-    localStorage.setItem('Championes', JSON.stringify(Championes));
+const actualizarCarrito = (Championes) => {
+    localStorage.setItem ("Championes", JSON.stringify(Championes));
+};
+
+if (localStorage.getItem ("Championes")) {
+    Championes = JSON.parse(localStorage.getItem("Championes"));
+    dibujarCarrito();
+}
+
+let modalCarrito = document.getElementById("Championes")
+const agregarAlCarrito = (id) => {
+    const indiceEncontradoCarrito = Championes.findIndex ((producto) => {
+        return producto.id === productos [id].id;
+    });
+    if (indiceEncontradoCarrito === -1) {
+        const productoAgregar = productos [id];
+        productoAgregar.cantidad = 1;
+        Championes.push (productoAgregar)
+        actualizarCarrito (Championes);
+        dibujarCarrito();
+    }else{
+        Championes[indiceEncontradoCarrito].cantidad += 1;
+        actualizarCarrito(Championes);
+        dibujarCarrito();
+    }
+}
+
+const removeProduct = (indice) => {
+    Championes.splice (indice, 1);
+    actualizarCarrito(Championes);
+    dibujarCarrito();
+}
