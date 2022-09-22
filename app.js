@@ -147,8 +147,9 @@ const agregarAlCarrito = (id) => {
     }
 }
 
-const removeProduct = (indice) => {
-    Championes.splice (indice, 1);
+const removeProduct = (id) => {
+    Championes.splice (id, 1);
     actualizarCarrito(Championes);
     dibujarCarrito();
 }
+
